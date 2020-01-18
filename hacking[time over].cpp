@@ -28,11 +28,11 @@ void DFS(int node) {
 	++cnt;
 	if( adj[node].empty() )
 		return;
+	int deep_size = deep.size();
 	for(int i=0; i<adj[node].size(); ++i) {
 		if(i>=1) --cnt; // 하나의 노드에 여러 edge가 있을때 중복 cnt 증가 방지. 
-		if(adj[node][i] <= deep.size()) { // 이미 검증된 노드는 DFS 탐색 안함. 
-			cnt += deep[i];
-			break;
+		if(adj[node][i] <= deep_size) { // 이미 검증된 노드는 DFS 탐색 안함. 
+			cnt += deep[adj[node][i]];
 		}
 		else { 
 			DFS(adj[node][i]);
