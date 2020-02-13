@@ -1,10 +1,15 @@
+/*
+	i) 힙을 구성한다. (상향, 하향 상관 X) 
+	ii) 맨 위에 있는 값과 마지막 값을 교환하며 뒤에서부터 하나씩 정렬한다. 
+	즉, O(N*logN)의 시간복잡도를 보장한다. 
+*/
 #include <stdio.h>
 
 int number = 9;
-int heap[9] = { 5, 2, 1, 10, 8, 9, 7, 6, 0 };
+int heap[9] = { 5, 6, 2, 1, 3, 9, 8, 7, 10 };
 
 int main(void) {
-	// 힙을 구성
+	// i) 힙을 구성한다.
 	for(int i=1; i<number; ++i) {
 		int c = i;
 		do {
@@ -17,12 +22,12 @@ int main(void) {
 			c = p;
 		} while(c != 0);
 	}
-	// 힙을 줄여가며 반복적으로 힙을 구성
-	for(int i=number - 1; i>=0; --i) {
+	// ii) 하나씩 빼가며 힙을 구성한다.
+	for(int i=number -1; i>=0; --i) {
 		int temp = heap[0];
 		heap[0] = heap[i];
 		heap[i] = temp;
-		int c, p=0;
+		int c, p = 0;
 		do {
 			c = p * 2 + 1;
 			if(c < i-1 && heap[c] < heap[c+1])
@@ -37,6 +42,6 @@ int main(void) {
 	}
 	for(int i=0; i<number; ++i)
 		printf("%d ", heap[i]);
-		
+	
 	return 0;
 }
